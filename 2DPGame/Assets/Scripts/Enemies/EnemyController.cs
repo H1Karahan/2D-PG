@@ -4,22 +4,73 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    private State currentState;
+
     private enum State
     {
-        Walking,
+        Moving,
         Knockback,
         Dead
     }
+    //--
 
-    private State currentState;
+    [SerializeField]
+    private float
+        groundCheckDistance,
+        wallCheckDistance,
+        movementSpeed,
+        maxHelath,
+        knockBackDuration;
 
+    [SerializeField]
+    private Transform
+        groundCheck,
+        wallCheck;
+
+    [SerializeField]
+    private GameObject
+        hitParticle,
+        deathChunkPaticle,
+        deathBloodPartcle;
+
+    [SerializeField] LayerMask whatisGround;
+    [SerializeField] Vector2 knockBackSpeed;
+
+    //--
+    private Vector2 movement;
+
+    private float 
+        currentHealth,
+        knockBackStartTime;
+
+    private int 
+        facingDirection,
+        damageDirection;
+
+    private bool
+        groundDetected,
+        wallDetected;
+
+    private GameObject alive;
+    private Rigidbody2D aliveRb;
+    private Animator aliveAnim;
+
+    private void Start()
+    {
+        alive = transform.Find("Alive").gameObject;
+        aliveRb = alive.GetComponent<Rigidbody2D>();
+        aliveAnim = alive.GetComponent<Animator>();
+
+        currentHealth = maxHelath;
+        facingDirection = 1;
+    }
 
     private void Update()
     {
         switch (currentState)
         {
-            case State.Walking:
-                UpdateWalkingState();
+            case State.Moving:
+                UpdateMovingState();
                 break;
             case State.Knockback:
                 UpdateKnockbackState();
@@ -35,17 +86,28 @@ public class EnemyController : MonoBehaviour
 
     //Walking State
 
-    private void EnterWalkingState()
+    private void EnterMovingState()
     {
 
     }
 
-    private void UpdateWalkingState()
+    private void UpdateMovingState()
     {
+        groundDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatisGround);
+        wallDetected = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDistance, whatisGround);
 
+        if (!groundDetected || wallDetected)
+        {
+            Flip();
+        }
+        else
+        {
+            movement.Set(movementSpeed * facingDirection, aliveRb.velocity.y);
+            aliveRb.velocity = movement;
+        }
     }
 
-    private void ExitWalkingState()
+    private void ExitMovingState()
     {
 
     }
@@ -54,24 +116,33 @@ public class EnemyController : MonoBehaviour
 
     private void EnterKnockbackState()
     {
+        knockBackStartTime = Time.time;
+        movement.Set(knockBackSpeed.x * damageDirection, knockBackSpeed.y);
+        aliveRb.velocity = movement;
 
+        aliveAnim.SetBool("Knockback", true);
     }
 
     private void UpdateKnockbackState()
     {
-
+        if (Time.time >= knockBackStartTime + knockBackDuration)
+        {
+            SwitchState(State.Moving);
+        }
     }
 
     private void ExitKnockbackState()
     {
-
+        aliveAnim.SetBool("Knockback", false);
     }
 
     //Dead State
 
     private void EnterDeadState()
     {
-
+        Instantiate(deathChunkPaticle, alive.transform.position, deathChunkPaticle.transform.rotation);
+        Instantiate(deathBloodPartcle, alive.transform.position, deathBloodPartcle.transform.rotation);
+        Destroy(gameObject);
     }
 
     private void UpdateDeadState()
@@ -86,12 +157,46 @@ public class EnemyController : MonoBehaviour
 
     //OtherFunc.
 
+    private void Damage(float[] attackDetails)
+    {
+        currentHealth -= attackDetails[0];
+
+        Instantiate(hitParticle, alive.transform.position, Quaternion.identity);
+
+        if (attackDetails[1] > alive.transform.position.x)
+        {
+            damageDirection = -1;
+        }
+        else
+        {
+            damageDirection = 1;
+        }
+
+        //Hit Part.
+
+        if (currentHealth > 0.0f)
+        {
+            SwitchState(State.Knockback);
+        }
+        else if (currentHealth<= 0.0f)
+        {
+            SwitchState(State.Dead);
+        }
+    }
+    private void Flip()
+    {
+        facingDirection *= -1;
+        alive.transform.Rotate(0f, 180f, 0f);
+
+    }
+
+
     private void SwitchState(State state)
     {
         switch (currentState)
         {
-            case State.Walking:
-                ExitWalkingState();
+            case State.Moving:
+                ExitMovingState();
                 break;
             case State.Knockback:
                 ExitKnockbackState();
@@ -105,8 +210,8 @@ public class EnemyController : MonoBehaviour
 
         switch (state)
         {
-            case State.Walking:
-                EnterWalkingState();
+            case State.Moving:
+                EnterMovingState();
                 break;
             case State.Knockback:
                 EnterKnockbackState();
@@ -119,5 +224,15 @@ public class EnemyController : MonoBehaviour
         }
 
         currentState = state;
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(groundCheck.position, new Vector2(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(wallCheck.position, new Vector2(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
     }
 }

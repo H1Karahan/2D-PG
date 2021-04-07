@@ -15,6 +15,8 @@ public class ChracterCombatController : MonoBehaviour
 
     private bool gotInput, isAttacking, isFirstAttack;
 
+    private float[] attackDetails = new float[2];
+
     private float lastInputTime = Mathf.NegativeInfinity;
 
     private Animator anim;
@@ -70,9 +72,12 @@ public class ChracterCombatController : MonoBehaviour
     {
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position, attack1Radius, whatIsDamageable);
 
+        attackDetails[0] = attack1Damage;
+        attackDetails[1] = transform.position.x;
+
         foreach (Collider2D collider in detectedObjects)
         {
-            collider.transform.parent.SendMessage("Damage", attack1Damage);
+            collider.transform.parent.SendMessage("Damage", attackDetails);
         }
     }
 

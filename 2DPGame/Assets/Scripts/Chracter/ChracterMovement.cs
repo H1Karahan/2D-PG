@@ -7,7 +7,9 @@ public class ChracterMovement : MonoBehaviour
     private float dashTimeLeft;
     private float lastDash;
 
+
     private int amountOfJumpsLeft;
+    private int facingDirection = 1;
 
 
     private bool isFacingRight = true;
@@ -173,7 +175,7 @@ public class ChracterMovement : MonoBehaviour
 
         if(Input.GetButtonDown("Dash"))
         {
-            if (Time.time >= lastDash + dashCoolDown && Mathf.Abs(rb.velocity.x) > 0)
+            if (Time.time >= lastDash + dashCoolDown)
             {
                 AttemptToDash();
             }
@@ -197,7 +199,7 @@ public class ChracterMovement : MonoBehaviour
                 canMove = false;
                 canFlip = false;
 
-                rb.velocity = new Vector2(dashSpeed * movementInputDirection, 0);
+                rb.velocity = new Vector2(dashSpeed * facingDirection, 0);
                 dashTimeLeft -= Time.deltaTime;
             }
 
@@ -252,6 +254,8 @@ public class ChracterMovement : MonoBehaviour
     private void Flip()
     {
         canFlip = true;
+
+        facingDirection *= -1;
         isFacingRight = !isFacingRight;
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
@@ -261,7 +265,7 @@ public class ChracterMovement : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
 
-        Gizmos.color = Color.blue;
+        Gizmos.color = Color.cyan;
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y, wallCheck.position.z));
     }
 }
