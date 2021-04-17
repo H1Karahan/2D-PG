@@ -121,6 +121,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &300592745 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5654517255184427161, guid: 05fa586b6d46bed45bcb9654b85869e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5654517256014862688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &444400730 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5654517254879585398, guid: 05fa586b6d46bed45bcb9654b85869e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5654517256014862688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &444400731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444400730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59b53b7bf4653a8468733a741f709092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityData: {fileID: 11400000, guid: daf519a8e9325ce48995d95dd47f9955, type: 2}
+  wallCheck: {fileID: 300592745}
+  ledgeCheck: {fileID: 1613447941}
+  playerCheck: {fileID: 1213159678}
+  idleStateData: {fileID: 11400000, guid: 31b47acf19c28274a8810512b5118fea, type: 2}
+  moveStateData: {fileID: 11400000, guid: bb90bb3fe251d564db1242716a80cce2, type: 2}
+  playerDetectedData: {fileID: 11400000, guid: 4bc86d06ae516a0499e27af7698d03df, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +367,7 @@ GameObject:
   - component: {fileID: 576285577}
   - component: {fileID: 576285576}
   - component: {fileID: 576285578}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chracter
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4483,6 +4514,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1213159678 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8654267984622021053, guid: 05fa586b6d46bed45bcb9654b85869e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5654517256014862688}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1271322096
 GameObject:
   m_ObjectHideFlags: 0
@@ -5249,6 +5286,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1613447941 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5654517255199211052, guid: 05fa586b6d46bed45bcb9654b85869e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5654517256014862688}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1743750063
 GameObject:
   m_ObjectHideFlags: 0
@@ -5401,7 +5444,7 @@ PrefabInstance:
     - target: {fileID: 5654517254879585398, guid: 05fa586b6d46bed45bcb9654b85869e7,
         type: 3}
       propertyPath: m_Name
-      value: Skeleton
+      value: Skeleton E1
       objectReference: {fileID: 0}
     - target: {fileID: 5654517254879585399, guid: 05fa586b6d46bed45bcb9654b85869e7,
         type: 3}
@@ -5458,5 +5501,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5654517255199211051, guid: 05fa586b6d46bed45bcb9654b85869e7,
+        type: 3}
+      propertyPath: m_Name
+      value: LedgeCheck
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654517256045303946, guid: 05fa586b6d46bed45bcb9654b85869e7,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: ba9d0c7e13f24764db6719a82af5fa61, type: 2}
+    - target: {fileID: 8654267984622021053, guid: 05fa586b6d46bed45bcb9654b85869e7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.19
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5654517254879585400, guid: 05fa586b6d46bed45bcb9654b85869e7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 05fa586b6d46bed45bcb9654b85869e7, type: 3}
