@@ -17,6 +17,7 @@ public class IdleState : State
         this.stateData = stateData;
     }
 
+
     public override void Enter()
     {
         base.Enter();
@@ -24,7 +25,6 @@ public class IdleState : State
         entity.SetVelocity(0f);
         isIdleTimeOver = false;
 
-        isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
         SetRandomIdleTime();
     }
 
@@ -52,6 +52,10 @@ public class IdleState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+    }
+    public override void DoChecks()
+    {
+        base.DoChecks();
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
     }
 

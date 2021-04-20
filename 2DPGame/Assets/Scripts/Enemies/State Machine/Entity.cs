@@ -79,7 +79,7 @@ public class Entity : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(wallCheck.position, wallCheck.position + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance));
 
-        Gizmos.color = Color.blue;
+        Gizmos.color = Color.cyan;
         Gizmos.DrawLine(ledgeCheck.position, ledgeCheck.position + (Vector3)(Vector2.down * entityData.ledgeCheckDistance));
     }
 }

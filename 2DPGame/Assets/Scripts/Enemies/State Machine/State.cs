@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State : MonoBehaviour
+public class State
 {
     protected FiniteStateMachine stateMachine;
     protected Entity entity;
@@ -22,6 +22,8 @@ public class State : MonoBehaviour
     {
         startTime = Time.time;
         entity.anim.SetBool(animBoolName, true);
+
+        DoChecks();
     }
 
     public virtual void Exit()
@@ -35,6 +37,11 @@ public class State : MonoBehaviour
     }
 
     public virtual void PhysicsUpdate()
+    {
+        DoChecks();
+    }
+
+    public virtual void DoChecks()
     {
 
     }
