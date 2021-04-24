@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class E1_LookForPlayerState : LookForPlayerState
+﻿public class E1_LookForPlayerState : LookForPlayerState
 {
     private Enemy1 enemy;
 

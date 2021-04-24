@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ChargeState : State
 {
@@ -8,9 +6,9 @@ public class ChargeState : State
 
     protected bool isDetectingWall;
     protected bool isDetectingLedge;
-
     protected bool isPlayerInMinAgroRange;
     protected bool isChargeTimeOver;
+    protected bool performCloseRangeAction;
 
     public ChargeState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, D_ChargeState stateData) : base(etity, stateMachine, animBoolName)
     {
@@ -53,5 +51,6 @@ public class ChargeState : State
         isDetectingWall = entity.CheckWall();
         isDetectingLedge = entity.CheckLedge();
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
+        performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
     }
 }
