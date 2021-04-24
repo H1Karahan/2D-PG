@@ -33,6 +33,11 @@
         {
             stateMachine.ChangeState(enemy.lookForPlayerState);
         }
+        else if (!isDetectingLedge)
+        {
+            entity.Flip();
+            stateMachine.ChangeState(enemy.moveState);
+        }
     }
 
     public override void PhysicsUpdate()

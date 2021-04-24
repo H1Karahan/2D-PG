@@ -239,6 +239,7 @@ MonoBehaviour:
     type: 2}
   meleeAttackData: {fileID: 11400000, guid: 71f38e8299358984b94b9ab79f2ec3bf, type: 2}
   stunStateData: {fileID: 11400000, guid: a0cd10c0b7eb0e34fa9bee5e5b70253f, type: 2}
+  deadStateData: {fileID: 11400000, guid: 05cc98de8f16ccb42b86efffb7e23975, type: 2}
   meleeAttackPosition: {fileID: 1300343906}
 --- !u!4 &444400732
 Transform:
@@ -492,7 +493,7 @@ Rigidbody2D:
   m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 4.2
   m_Material: {fileID: 6200000, guid: ba9d0c7e13f24764db6719a82af5fa61, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -654,6 +655,7 @@ MonoBehaviour:
   inputTimer: 0.2
   attack1Radius: 0.8
   attack1Damage: 10
+  stunDamageAmount: 1
   attack1HitBoxPos: {fileID: 1481467371}
   whatIsDamageable:
     serializedVersion: 2
@@ -5222,7 +5224,7 @@ GameObject:
   - component: {fileID: 1654059948}
   m_Layer: 9
   m_Name: Alive
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5259,18 +5261,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3074875, y: -0.25139153}
+  m_Offset: {x: -0.3074875, y: -0.28134978}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.375, y: 2}
+    oldSize: {x: 1.5, y: 2}
     newSize: {x: 1.5, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.752058, y: 1.4972169}
+  m_Size: {x: 0.752058, y: 1.4373004}
   m_EdgeRadius: 0
 --- !u!50 &1654059945
 Rigidbody2D:

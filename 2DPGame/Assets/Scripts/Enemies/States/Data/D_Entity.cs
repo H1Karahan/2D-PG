@@ -23,5 +23,7 @@ public class D_Entity : ScriptableObject
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
 
+    public GameObject hitParticle;
+
 
 }
